@@ -1,9 +1,6 @@
 import type { ReactNode } from 'react';
 import { GithubLogo } from '@phosphor-icons/react';
-
-interface LoginPageProps {
-  onLoginWithGithub?: () => void;
-}
+import { API_URL } from '@/lib/api';
 
 // Cores extraídas do SVG do protótipo
 const GREEN = '#00C68F';
@@ -11,7 +8,11 @@ const BG = '#FBFBFB';
 const TEXT_DARK = '#1F2937';
 const TEXT_MUTED = '#727272';
 
-export function LoginPage({ onLoginWithGithub }: LoginPageProps) {
+function startGithubLogin() {
+  window.location.href = `${API_URL}/auth/github`;
+}
+
+export function LoginPage() {
   return (
     <>
       {/* ============================= Desktop ============================= */}
@@ -61,7 +62,7 @@ export function LoginPage({ onLoginWithGithub }: LoginPageProps) {
 
         {/* Conteúdo direito */}
         <div className="absolute inset-y-0 left-[44%] right-0 z-20 flex items-center justify-center px-6">
-          <WelcomeBlock onLoginWithGithub={onLoginWithGithub} />
+          <WelcomeBlock />
         </div>
       </div>
 
@@ -103,7 +104,7 @@ export function LoginPage({ onLoginWithGithub }: LoginPageProps) {
             SiNutre
           </h1>
           <div className="flex-1 flex items-center justify-center">
-            <WelcomeBlock onLoginWithGithub={onLoginWithGithub} />
+            <WelcomeBlock />
           </div>
         </main>
       </div>
@@ -111,11 +112,7 @@ export function LoginPage({ onLoginWithGithub }: LoginPageProps) {
   );
 }
 
-function WelcomeBlock({
-  onLoginWithGithub,
-}: {
-  onLoginWithGithub?: () => void;
-}) {
+function WelcomeBlock() {
   return (
     <div className="flex flex-col items-center gap-6 text-center max-w-sm w-full">
       <h2
@@ -131,7 +128,7 @@ function WelcomeBlock({
       </p>
       <button
         type="button"
-        onClick={onLoginWithGithub}
+        onClick={startGithubLogin}
         className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3 text-white font-medium shadow-md transition-colors cursor-pointer"
         style={{ backgroundColor: TEXT_DARK }}
       >
