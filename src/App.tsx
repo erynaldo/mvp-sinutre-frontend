@@ -19,7 +19,7 @@ function consumeTokenFromUrl(): string | null {
 }
 
 export default function App() {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
 
   const [token, setLocalToken] = useState<string | null>(
     () => consumeTokenFromUrl() ?? getToken(),
