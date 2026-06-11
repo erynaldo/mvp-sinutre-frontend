@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { AddMealCard } from '@/components/cards/AddMealCard';
 import { TotalMealsCard } from '@/components/cards/TotalMealsCard';
 import { Header } from '@/components/layout/Header';
@@ -12,8 +12,7 @@ import type { Meal } from '@/types/mealSummary';
 import { api } from '@/lib/api';
 
 import {
-  MACRO_SUMMARY,
-  MEALS_SUMMARY
+  MACRO_SUMMARY
 } from '@/data/mockData';
 import { useMealModal } from '@/hooks/useMealModal';
 
@@ -37,6 +36,39 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
 
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
+
+  
+
+  const mealsSummary = useMemo(() => {
+    const today = new Date();
+
+    const total = meals.length;
+
+    const todayCount = meals.filter((meal) => {
+      const date = new Date(meal.createdAt);
+
+      return (
+        date.getDate() === today.getDate() &&
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear()
+      );
+    }).length;
+
+    const monthCount = meals.filter((meal) => {
+      const date = new Date(meal.createdAt);
+
+      return (
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear()
+      );
+    }).length;
+
+    return {
+      total,
+      thisMonth: monthCount,
+      today: todayCount,
+    };
+  }, [meals]);
 
   async function loadMeals() {
     try {
@@ -63,7 +95,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
         <MacroStatsBar summary={MACRO_SUMMARY} />
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 items-stretch">
-          <TotalMealsCard summary={MEALS_SUMMARY} />
+          <TotalMealsCard summary={mealsSummary} />
           <AddMealCard onSelectCategory={modal.openWith} />
         </div>
 

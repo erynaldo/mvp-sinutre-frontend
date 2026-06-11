@@ -34,3 +34,4 @@ export interface Meal {
 
   items: MealItem[];
 }
+
