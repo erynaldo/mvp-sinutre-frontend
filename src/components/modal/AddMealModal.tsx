@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import type { FoodItem, MacroSummary } from '@/types/meal';
 import { MealItemForm } from './MealItemForm';
 import { MealItemsTable } from './MealItemsTable';
@@ -8,7 +8,6 @@ import type { MealCategory } from '@/types/meal';
 
 interface AddMealModalProps {
   open: boolean;
-  macros: Pick<MacroSummary, 'carbs' | 'proteins' | 'fats' | 'calories'>;
   typeMeal?: MealCategory;
   onClose: () => void;
   onSave: () => void;
@@ -17,7 +16,6 @@ interface AddMealModalProps {
 
 export function AddMealModal({
   open,
-  macros,
   typeMeal,
   onClose,
   onSave,
@@ -43,6 +41,29 @@ export function AddMealModal({
       ),
     );
   }
+
+  const macros = useMemo(
+    () =>
+      items.reduce(
+        (acc, item) => {
+          acc.carbs += item.carbs;
+          acc.proteins += item.protein;
+          acc.fats += item.fat;
+          acc.calories += item.calories;
+
+          return acc;
+        },
+        {
+          carbs: 0,
+          proteins: 0,
+          fats: 0,
+          calories: 0,
+          caloriesGoal: 0,
+        },
+      ),
+    [items],
+  );
+  
 
   return (
     <div className={`modal ${open ? 'modal-open' : ''}`} role="dialog">

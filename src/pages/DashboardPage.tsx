@@ -7,6 +7,7 @@ import { MealsList } from '@/components/meals/MealsList';
 import { MealsTable } from '@/components/meals/MealsTable';
 import { AddMealModal } from '@/components/modal/AddMealModal';
 import { useAuth } from '@/contexts/AuthContext';
+
 import {
   MACRO_SUMMARY,
   MEALS_SUMMARY,
@@ -57,7 +58,6 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
 
       <AddMealModal
         open={modal.open}
-        macros={MODAL_MACROS}
         typeMeal={modal.selectedCategory}
         onClose={modal.close}
         onSave={modal.close}
