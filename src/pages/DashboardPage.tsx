@@ -37,8 +37,6 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
 
-  
-
   const mealsSummary = useMemo(() => {
     const today = new Date();
 
@@ -70,6 +68,27 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
     };
   }, [meals]);
 
+  const macroSummary = useMemo(() => {
+    return meals.reduce(
+      (acc, meal) => {
+        acc.carbs += meal.totals.carbs;
+        acc.proteins += meal.totals.proteins;
+        acc.fats += meal.totals.fats;
+        acc.calories += meal.totals.calories;
+
+        return acc;
+      },
+      {
+        carbs: 0,
+        proteins: 0,
+        fats: 0,
+        calories: 0,
+
+        caloriesGoal: 100, //ainda não veio do banco de dados
+      },
+    );
+  }, [meals]);
+
   async function loadMeals() {
     try {
       const response = await api.get('/meals');
@@ -92,7 +111,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
           avatarUrl={user.avatarUrl}
         />
 
-        <MacroStatsBar summary={MACRO_SUMMARY} />
+        <MacroStatsBar summary={macroSummary} />
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 items-stretch">
           <TotalMealsCard summary={mealsSummary} />
