@@ -30,9 +30,8 @@ export function Sidebar({ drawerId }: SidebarProps) {
               key={item.id}
               label={item.label}
               Icon={item.Icon}
-              active={item.id === activeId}
+              to={item.to}
               expanded={expanded}
-              onClick={() => setActiveId(item.id)}
             />
           ))}
         </ul>
