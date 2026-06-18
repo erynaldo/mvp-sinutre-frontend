@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react';
-
+import { useState, useEffect } from 'react';
 import { FormField } from '../forms/FormField';
 
+import { FoodItem } from '@/types/meal';
+import { Food } from '@/types/food';
 import { searchFoods } from '@/services/foodService';
-import type { Food } from '@/types/food';
-import type { FoodItem } from '@/types/meal';
-
 
 interface MealItemFormProps {
   onAdd: (item: FoodItem) => void;
 }
 
-export function MealItemForm({
-  onAdd,
-}: MealItemFormProps) {
+
+export function MealItemForm({ onAdd }: MealItemFormProps) {
   const [query, setQuery] = useState('');
 
   const [foods, setFoods] = useState<Food[]>([]);
@@ -24,49 +21,49 @@ export function MealItemForm({
   const [grams, setGrams] = useState('');
 
   function handleAdd() {
-  if (!selectedFood) {
-    return;
-  }
+    if (!selectedFood) {
+      return;
+    }
 
-  const gramsValue = Number(grams);
+    const gramsValue = Number(grams);
 
-  if (gramsValue <= 0) {
-    return;
-  }
+    if (gramsValue <= 0) {
+      return;
+    }
 
-  onAdd({
-      id: Date.now(),
+    onAdd({
+        id: Date.now(),
 
-      foodId: selectedFood.id,
+        foodId: selectedFood.id,
 
-      name: selectedFood.name,
+        name: selectedFood.name,
 
-      grams: gramsValue,
+        grams: gramsValue,
 
-      calories:
-        (selectedFood.caloriesPer100g *
-          gramsValue) /
-        100,
+        calories:
+          (selectedFood.caloriesPer100g *
+            gramsValue) /
+          100,
 
-      carbs:
-        (selectedFood.carbsPer100g *
-          gramsValue) /
-        100,
+        carbs:
+          (selectedFood.carbsPer100g *
+            gramsValue) /
+          100,
 
-      protein:
-        (selectedFood.proteinPer100g *
-          gramsValue) /
-        100,
+        protein:
+          (selectedFood.proteinPer100g *
+            gramsValue) /
+          100,
 
-      fat:
-        (selectedFood.fatPer100g *
-          gramsValue) /
-        100,
-    });
+        fat:
+          (selectedFood.fatPer100g *
+            gramsValue) /
+          100,
+      });
 
-    setSelectedFood(null);
-    setQuery('');
-    setGrams('');
+      setSelectedFood(null);
+      setQuery('');
+      setGrams('');
   }
 
   useEffect(() => {
@@ -85,11 +82,12 @@ export function MealItemForm({
     return () => clearTimeout(timeout);
   }, [query]);
 
+
+
   return (
     <div className="grid gap-4 items-end lg:[grid-template-columns:1fr_150px_120px]">
-
       <div className="relative">
-
+        
         <FormField
           label="Alimento"
           htmlFor="item-name"
@@ -137,19 +135,15 @@ export function MealItemForm({
         <input
           id="item-grams"
           type="number"
+          className="input input-bordered w-full"
           value={grams}
           onChange={(e) =>
             setGrams(e.target.value)
           }
-          className="input input-bordered w-full"
         />
       </FormField>
 
-      <button
-        type="button"
-        onClick={handleAdd}
-        className="btn btn-primary btn-outline h-12"
-      >
+      <button type="button" className="btn btn-primary btn-outline h-12"  onClick={handleAdd}>
         Adicionar
       </button>
 

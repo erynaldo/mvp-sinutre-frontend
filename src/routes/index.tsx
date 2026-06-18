@@ -7,7 +7,7 @@ import {
 import { AppLayout } from '@/layouts/AppLayout';
 import { LoginPage } from '@/pages/LoginPage';
 import { DashboardPage } from '@/pages/DashboardPage';
-import { ProtectedRoute } from './ProtectedRoute';
+import { ProtectedRoute } from './ProtectRoute';
 import { DietFoodPage } from '@/pages/DietFood';
 
 export function Router() {
@@ -28,20 +28,29 @@ export function Router() {
           }
         >
           <Route
+            path="/foods"
+            element={<DietFoodPage />}
+        
+          />
+
+        </Route>
+
+       
+
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route
             path="/"
             element={
               <DashboardPage drawerId="main-drawer" />
             }
           />
 
-          <Route
-            path="/foods"
-            element={
-              <DietFoodPage />
-            }
-          />
-
-          
         </Route>
 
       </Routes>

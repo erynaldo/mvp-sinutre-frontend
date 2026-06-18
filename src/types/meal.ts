@@ -13,6 +13,12 @@ export interface FoodItem {
   fat: number;
 }
 
+export type MealState = {
+  description: string;
+  type: string;
+  eatTime: string;
+}
+
 export interface Meal {
   id: number;
   date: string;

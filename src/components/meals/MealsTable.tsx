@@ -1,4 +1,4 @@
-import type { Meal } from '@/types/meal';
+import type { Meal } from "@/types/mealSummary";
 import { MealsTableRow } from './MealsTableRow';
 
 interface MealsTableProps {
@@ -15,7 +15,6 @@ export function MealsTable({ meals, onActionClick }: MealsTableProps) {
           <thead className="bg-base-200/70 text-base-content/60 uppercase text-xs">
             <tr>
               <th className="w-16 text-center">ID</th>
-              
               <th>Descrição</th>
               <th>Data</th>
               <th>Categoria</th>

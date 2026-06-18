@@ -1,4 +1,4 @@
-export type MealCategory = 'breakfast' | 'lunch' | 'snack' | 'dinner' | '';
+export type MealCategory = 'breakfast' | 'lunch' | 'snack' | 'dinner' ;
 
 
 export interface MealItem {
@@ -23,6 +23,7 @@ export interface Meal {
   type: MealCategory;
 
   createdAt: string;
+  eatTime: string;
 
   totals: {
     grams: number;
@@ -34,4 +35,3 @@ export interface Meal {
 
   items: MealItem[];
 }
-

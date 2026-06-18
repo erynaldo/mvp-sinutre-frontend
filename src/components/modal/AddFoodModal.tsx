@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { createFood } from '@/services/foodService';
-import { useMemo } from 'react';
 
 interface AddFoodModalProps {
   modalId: string;
@@ -26,7 +25,6 @@ export function AddFoodModal({
     useState('');
 
   const [loading, setLoading] = useState(false);
-  
 
   async function handleSave() {
     try {

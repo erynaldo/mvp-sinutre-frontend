@@ -5,14 +5,14 @@ interface SidebarItemProps {
   label: string;
   Icon: Icon;
   expanded: boolean;
-  to: string;
+  to?:string;
 }
 
 export function SidebarItem({
   label,
   Icon,
-  expanded,
   to,
+  expanded
 }: SidebarItemProps) {
   return (
     <li>

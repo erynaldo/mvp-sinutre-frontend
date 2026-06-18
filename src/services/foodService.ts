@@ -26,5 +26,6 @@ export async function searchFoods(
     },
   });
 
-  return response.data;
+ return response.data;
+
 }

@@ -15,7 +15,7 @@ export function MealsTableRow({ meal, onActionClick }: MealsTableRowProps) {
     <tr className="hover">
       <td className="text-center font-bold text-base-content/60">{meal.id}</td>
       <td className="font-medium">{meal.name}</td>
-      <td className="font-medium">{formatDate(meal.createdAt)}</td>
+      <td className="font-medium">{formatDate(meal.eatTime)}</td>
       <td className="font-semibold">{category.label}</td>
       <td>
         <span className="badge badge-primary badge-outline">

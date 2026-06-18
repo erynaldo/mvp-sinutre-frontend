@@ -7,12 +7,15 @@ import { MealFab } from '@/components/meals/MealFab';
 import { MealsList } from '@/components/meals/MealsList';
 import { MealsTable } from '@/components/meals/MealsTable';
 import { AddMealModal } from '@/components/modal/AddMealModal';
-import { useAuth } from '@/contexts/AuthContext';
-import type { Meal } from '@/types/mealSummary';
+import { useAuth } from '@/context/AuthContext';
+import { Meal } from '@/types/mealSummary';
 import { api } from '@/lib/api';
 
 import {
-  MACRO_SUMMARY
+  MACRO_SUMMARY,
+  MEALS_SUMMARY,
+  // RECENT_MEALS,
+  // SAMPLE_MEAL_ITEMS,
 } from '@/data/mockData';
 import { useMealModal } from '@/hooks/useMealModal';
 
@@ -29,13 +32,26 @@ const MODAL_MACROS = {
 
 export function DashboardPage({ drawerId }: DashboardPageProps) {
   const { user } = useAuth();
-
-  if (!user) return null;
-
+  if (!user){
+    return <></>
+  }
   const modal = useMealModal();
 
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
+
+  async function loadMeals() {
+    try {
+      const response = await api.get('/meals');
+      setMeals(response.data);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadMeals();
+  }, []);
 
   const mealsSummary = useMemo(() => {
     const today = new Date();
@@ -43,7 +59,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
     const total = meals.length;
 
     const todayCount = meals.filter((meal) => {
-      const date = new Date(meal.createdAt);
+      const date = new Date(meal.eatTime);
 
       return (
         date.getDate() === today.getDate() &&
@@ -53,7 +69,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
     }).length;
 
     const monthCount = meals.filter((meal) => {
-      const date = new Date(meal.createdAt);
+      const date = new Date(meal.eatTime);
 
       return (
         date.getMonth() === today.getMonth() &&
@@ -69,7 +85,15 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
   }, [meals]);
 
   const macroSummary = useMemo(() => {
-    return meals.reduce(
+    const today = new Date();
+    return meals.filter((meal) => {
+      const date = new Date(meal.eatTime);
+      return (
+        date.getDay() === today.getDay() &&
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear()
+      );
+    }).reduce(
       (acc, meal) => {
         acc.carbs += meal.totals.carbs;
         acc.proteins += meal.totals.proteins;
@@ -84,23 +108,11 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
         fats: 0,
         calories: 0,
 
-        caloriesGoal: 100, //ainda não veio do banco de dados
+        caloriesGoal: 1000, //ainda não veio do banco de dados
       },
     );
   }, [meals]);
 
-  async function loadMeals() {
-    try {
-      const response = await api.get('/meals');
-      setMeals(response.data);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    loadMeals();
-  }, []);
 
   return (
     <>
@@ -128,8 +140,8 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
         open={modal.open}
         typeMeal={modal.selectedCategory}
         onClose={modal.close}
+        onSave={modal.close}
         onMealCreated={loadMeals}
-        
       />
     </>
   );

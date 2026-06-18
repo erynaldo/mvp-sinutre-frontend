@@ -9,7 +9,7 @@ interface MealListItemProps {
 }
 
 export function MealListItem({ meal, onActionClick }: MealListItemProps) {
-  const category = MEAL_CATEGORY_BY_ID[meal.type] ;
+  const category = MEAL_CATEGORY_BY_ID[meal.type];
   const Icon = category.Icon;
 
   return (
@@ -20,7 +20,8 @@ export function MealListItem({ meal, onActionClick }: MealListItemProps) {
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-sm">{category.label}</p>
-          <p className="text-xs text-base-content/50">{formatDate(meal.createdAt)}</p>
+          <p className="font-semibold text-sm">{meal.name}</p>
+          <p className="text-xs text-base-content/50">{formatDate(meal.eatTime)}</p>
         </div>
         <span className="badge badge-primary badge-outline badge-sm">
           {meal.totals.calories} kcal

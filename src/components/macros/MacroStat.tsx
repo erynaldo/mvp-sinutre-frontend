@@ -21,10 +21,8 @@ export function MacroStat({
   const wrapperClasses = isHighlight
     ? 'stat text-center bg-primary text-primary-content border-none shadow-md'
     : (isDanger) ? 'stat text-center bg-red-700 text-white border-none shadow-md' : 'stat text-center lg:border-r border-base-200';
-
-    
-
-  const valueMutedClass = isHighlight
+  
+    const valueMutedClass = isHighlight
     ? 'opacity-70'
     : (isDanger) ? 'text-white' : 'text-base-content/60';
 
