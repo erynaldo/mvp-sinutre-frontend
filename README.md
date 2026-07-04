@@ -43,7 +43,6 @@ npm run lint    # ESLint em todo o projeto
 npm run preview # preview do build
 ```
 
-## Tema
-
-O tema customizado `sinutre` (paleta verde) está definido em
-`src/styles/theme.css` usando a sintaxe `@plugin 'daisyui/theme'` do daisyUI v5.
+## Alterações feitas por mim
+* fiz a copia do arquivo .env.example
+* Removi a conexão com o repositório do curso. Desconectei do projeto original, do qual eu tinha clonado. Comando bash: git remote remove origin
