@@ -27,7 +27,7 @@ export function DietFoodPage() {
   }, []);
 
   return (
-    <div className="w-full max-w-[1200px] mx-auto">
+    <div className="w-full max-w-300 mx-auto">
       <SimpleHeader
         title="Dieta"
         subtitle="Gerencie seus alimentos"

@@ -85,7 +85,8 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
 
 
   return (
-    <div className="grid gap-4 items-end lg:[grid-template-columns:1fr_150px_120px]">
+    // <div className="grid gap-4 items-end lg:[grid-template-columns:1fr_150px_120px]">
+    <div className="grid gap-4 items-end lg:grid-template-columns:1fr_150px_120px">
       <div className="relative">
         
         <FormField

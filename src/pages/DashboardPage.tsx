@@ -124,7 +124,8 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
 
   return (
     <>
-      <div className="flex flex-col gap-6 w-full max-w-[1200px] mx-auto mb-8">
+      {/* <div className="flex flex-col gap-6 w-full max-w-[1200px] mx-auto mb-8"> */}
+      <div className="flex flex-col gap-6 w-full max-w-300 mx-auto mb-8">
         <Header
           drawerId={drawerId}
           userName={user.name}
