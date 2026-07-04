@@ -1,8 +1,8 @@
-# Nutridash
+# mvp-sinutre-frontend
 
-Dashboard de nutrição em React, convertido a partir do protótipo HTML original
-em `../Nutridash`. Toda a estilização foi migrada para Tailwind CSS (com daisyUI
-v5 como plugin) e a UI foi quebrada em componentes reutilizáveis.
+Backend do **SiNutre — Sistema de Ingestão de Macronutrientes**.
+
+Stack: **TypeScript + Express + Prisma + SQLite**.
 
 ## Stack
 
