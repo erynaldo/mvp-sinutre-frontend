@@ -4,7 +4,11 @@ import { API_URL } from '@/lib/api';
 
 // Cores extraídas do SVG do protótipo
 const GREEN = '#00C68F';
-const BG = '#FBFBFB';
+// const YELLOW = '#F9C74F';
+
+// antes esse era +- branco gelo
+const BG = '#f7ef97'; 
+
 const TEXT_DARK = '#1F2937';
 const TEXT_MUTED = '#727272';
 
@@ -29,7 +33,7 @@ export function LoginPage() {
         {/* Marca SiNutre — topo da área branca, alinhada à esquerda (logo após o painel verde) */}
         <h1
           className="absolute top-10 left-[30%] lg:top-12 z-20 text-5xl lg:text-6xl font-extrabold tracking-tight"
-          style={{ color: GREEN }}
+          style={{ color: TEXT_DARK }}
         >
           SiNutre
         </h1>
@@ -39,7 +43,7 @@ export function LoginPage() {
           className="absolute z-10 left-0 -translate-y-1/2"
           style={{ top: '57%', width: '44%' }}
         >
-          <div className="relative aspect-[596/419]">
+          <div className="relative aspect-596/419">
             <img
               src="/plate.png"
               alt="Prato com vitaminas, proteínas, carboidratos e gorduras"
@@ -75,7 +79,7 @@ export function LoginPage() {
           className="text-white px-6 pt-10 pb-8 flex flex-col items-center"
           style={{ backgroundColor: GREEN }}
         >
-          <div className="relative w-[85%] max-w-sm aspect-[596/419]">
+          <div className="relative w-[85%] max-w-sm aspect-596/419">
             <img
               src="/plate.png"
               alt=""
@@ -117,7 +121,7 @@ function WelcomeBlock() {
     <div className="flex flex-col items-center gap-6 text-center max-w-sm w-full">
       <h2
         className="text-4xl lg:text-5xl font-bold"
-        style={{ color: GREEN }}
+        style={{ color: TEXT_DARK }}
       >
         Bem-vindo(a)!
       </h2>
@@ -130,7 +134,7 @@ function WelcomeBlock() {
         type="button"
         onClick={startGithubLogin}
         className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3 text-white font-medium shadow-md transition-colors cursor-pointer"
-        style={{ backgroundColor: TEXT_DARK }}
+        style={{ backgroundColor: GREEN }}
       >
         <GithubLogo size={22} weight="fill" />
         Entrar com Github

@@ -19,7 +19,7 @@ export function Sidebar({ drawerId }: SidebarProps) {
         className="drawer-overlay"
       />
       <div
-        className={`bg-base-100 flex flex-col min-h-full border-r border-base-200 shadow-sm transition-all duration-300 ${
+        className={`bg-yellow-100 flex flex-col min-h-full border-r border-base-200 shadow-sm transition-all duration-300 ${
           expanded ? 'w-64 items-start' : 'w-20 items-center'
         }`}
       >
