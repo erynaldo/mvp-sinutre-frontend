@@ -45,6 +45,7 @@ npm run preview # preview do build
 
 ## Alterações feitas por mim
 * fiz a copia do arquivo .env.example
-* Removi a conexão com o repositório do curso. Desconectei do projeto original, do qual eu tinha clonado. Comando bash: git remote remove origin
-* Alterei cores da pagina inicial, deixei no estilo cores que representam o Brasil
+* Removi a conexão com o repositório do curso. Desconectei do projeto original, do qual eu tinha clonado. Comando bash: git remote remove origin.
+* Design da Página de Login: alterei cores de alguns elementos e background.
+* Implementado a funcionalidade logout "Sair".
 

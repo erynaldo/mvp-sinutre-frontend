@@ -14,7 +14,7 @@ export function AddMealCard({ onSelectCategory }: AddMealCardProps) {
           Incluir refeição
         </h2>
 
-        <div className="grid auto-rows-fr gap-4 h-full [grid-template-columns:repeat(auto-fit,minmax(130px,1fr))]">
+        <div className="grid auto-rows-fr gap-4 h-full grid-cols-[repeat(auto-fit,minmax(130px,1fr))]">
           {MEAL_CATEGORIES.map(category => (
             <MealActionButton
               key={category.id}
