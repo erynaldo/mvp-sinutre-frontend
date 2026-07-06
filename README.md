@@ -48,4 +48,5 @@ npm run preview # preview do build
 * Removi a conexão com o repositório do curso. Desconectei do projeto original, do qual eu tinha clonado. Comando bash: git remote remove origin.
 * Design da Página de Login: alterei cores de alguns elementos e background.
 * Implementado a funcionalidade logout "Sair".
+* Adicionado uma animação na página de Login.
 

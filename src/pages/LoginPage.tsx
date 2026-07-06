@@ -1,13 +1,14 @@
 import type { ReactNode } from 'react';
 import { GithubLogo } from '@phosphor-icons/react';
 import { API_URL } from '@/lib/api';
+import { motion } from 'framer-motion';
 
 // Cores extraídas do SVG do protótipo
 const GREEN = '#00C68F';
 // const YELLOW = '#F9C74F';
 
 // antes esse era +- branco gelo
-const BG = '#f7ef97'; 
+const BG = '#f7ef97';
 
 const TEXT_DARK = '#1F2937';
 const TEXT_MUTED = '#727272';
@@ -39,8 +40,15 @@ export function LoginPage() {
         </h1>
 
         {/* Prato com pílulas — sobrepõe a borda verde/branca (vai de 0% a ≈44%) */}
-        <div
+        {/* <div
           className="absolute z-10 left-0 -translate-y-1/2"
+          style={{ top: '57%', width: '44%' }}
+        > */}
+        <motion.div
+          initial={{ x: -100, y: 100, opacity: 0 }}
+          animate={{ x: 0, y: 0, opacity: 1 }} // Note que ajustei o Y para 0
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="absolute z-10 left-0"
           style={{ top: '57%', width: '44%' }}
         >
           <div className="relative aspect-596/419">
@@ -62,19 +70,19 @@ export function LoginPage() {
               Gorduras
             </Pill>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Conteúdo direito */}
-        <div className="absolute inset-y-0 left-[44%] right-0 z-20 flex items-center justify-center px-6">
-          <WelcomeBlock />
-        </div>
+      {/* Conteúdo direito */}
+      <div className="absolute inset-y-0 left-[44%] right-0 z-20 flex items-center justify-center px-6">
+        <WelcomeBlock />
       </div>
+    </div >
 
-      {/* ============================= Mobile ============================= */}
-      <div
-        className="md:hidden min-h-screen flex flex-col"
-        style={{ backgroundColor: BG }}
-      >
+      {/* ============================= Mobile ============================= */ }
+      < div
+  className = "md:hidden min-h-screen flex flex-col"
+  style = {{ backgroundColor: BG }
+} >
         <header
           className="text-white px-6 pt-10 pb-8 flex flex-col items-center"
           style={{ backgroundColor: GREEN }}
@@ -111,7 +119,7 @@ export function LoginPage() {
             <WelcomeBlock />
           </div>
         </main>
-      </div>
+      </div >
     </>
   );
 }
@@ -134,7 +142,7 @@ function WelcomeBlock() {
         type="button"
         onClick={startGithubLogin}
         className="inline-flex items-center gap-2.5 rounded-xl px-6 py-3 text-white font-medium shadow-md transition-colors cursor-pointer"
-        style={{ backgroundColor: GREEN }}
+        style={{ backgroundColor: TEXT_DARK }}
       >
         <GithubLogo size={22} weight="fill" />
         Entrar com Github
