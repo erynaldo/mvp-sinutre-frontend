@@ -46,7 +46,7 @@ export function LoginPage() {
         > */}
         <motion.div
           initial={{ x: -100, y: 100, opacity: 0 }}
-          animate={{ x: 0, y: 0, opacity: 1 }} // Note que ajustei o Y para 0
+          animate={{ x: 0, y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="absolute z-10 left-0 -translate-y-1/2"
           style={{ top: '57%', width: '44%' }}
@@ -72,40 +72,48 @@ export function LoginPage() {
           </div>
         </motion.div>
 
-      {/* Conteúdo direito */}
-      <div className="absolute inset-y-0 left-[44%] right-0 z-20 flex items-center justify-center px-6">
-        <WelcomeBlock />
-      </div>
-    </div >
+        {/* Conteúdo direito */}
+        <div className="absolute inset-y-0 left-[44%] right-0 z-20 flex items-center justify-center px-6">
+          <WelcomeBlock />
+        </div>
+      </div >
 
-      {/* ============================= Mobile ============================= */ }
+      {/* ============================= Mobile ============================= */}
       < div
-  className = "md:hidden min-h-screen flex flex-col"
-  style = {{ backgroundColor: BG }
-} >
+        className="md:hidden min-h-screen flex flex-col"
+        style={{ backgroundColor: BG }}
+      >
         <header
           className="text-white px-6 pt-10 pb-8 flex flex-col items-center"
-          style={{ backgroundColor: GREEN }}
+          style={{ backgroundColor: TEXT_DARK }}
         >
-          <div className="relative w-[85%] max-w-sm aspect-596/419">
-            <img
-              src="/plate.png"
-              alt=""
-              className="absolute inset-0 w-full h-full object-contain"
-            />
-            <Pill className="top-[19%] left-[22%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
-              Vitaminas
-            </Pill>
-            <Pill className="top-[19%] left-[83%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
-              Proteínas
-            </Pill>
-            <Pill className="top-[78%] left-[19%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
-              Carboidratos
-            </Pill>
-            <Pill className="top-[82%] left-[81%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
-              Gorduras
-            </Pill>
-          </div>
+          <motion.div
+            initial={{ x: -100, y: 100, opacity: 0 }}
+            animate={{ x: 0, y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="absolute z-10 left-0 -translate-y-1/2"
+            style={{ top: '57%', width: '44%' }}
+          >
+            <div className="relative w-[85%] max-w-sm aspect-596/419">
+              <img
+                src="/plate.png"
+                alt=""
+                className="absolute inset-0 w-full h-full object-contain"
+              />
+              <Pill className="top-[19%] left-[22%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
+                Vitaminas
+              </Pill>
+              <Pill className="top-[19%] left-[83%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
+                Proteínas
+              </Pill>
+              <Pill className="top-[78%] left-[19%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
+                Carboidratos
+              </Pill>
+              <Pill className="top-[82%] left-[81%] -translate-x-1/2 -translate-y-1/2 text-xs px-3 py-1">
+                Gorduras
+              </Pill>
+            </div>
+          </motion.div>
         </header>
 
         <main className="flex-1 flex flex-col px-6 py-8">
