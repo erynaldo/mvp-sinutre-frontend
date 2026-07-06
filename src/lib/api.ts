@@ -8,7 +8,7 @@ export const api = axios.create({
   baseURL: API_URL,
 });
 
-const TOKEN_KEY = 'sinutre.token';
+export const TOKEN_KEY = 'sinutre.token';
 
 export function getToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);

@@ -5,7 +5,7 @@ import {
   useState,
 } from 'react';
 
-import { api } from '@/lib/api';
+import { api, clearToken } from '@/lib/api';
 import type { User } from '@/types/user';
 
 interface AuthContextData {
@@ -22,6 +22,7 @@ const AuthContext =
 
 export function AuthProvider({
   children,
+  
 }: {
   children: React.ReactNode;
 }) {
@@ -43,15 +44,16 @@ export function AuthProvider({
     }
   }
 
-    // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   function logout() {
+    clearToken();
     localStorage.removeItem("token");
 
     delete api.defaults.headers.Authorization;
 
     setUser(null);
 
-    window.location.href = "/";
+    window.location.href = "/login";
   }
   // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
