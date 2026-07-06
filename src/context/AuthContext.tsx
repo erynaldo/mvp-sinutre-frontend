@@ -53,7 +53,7 @@ export function AuthProvider({
 
     setUser(null);
 
-    window.location.href = "/login";
+    window.location.href = "/";
   }
   // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
