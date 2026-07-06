@@ -16,7 +16,8 @@ export function Router() {
       <Routes>
 
         <Route
-          path="/login"
+          // path="/login"
+          path="/"
           element={<LoginPage />}
         />
 

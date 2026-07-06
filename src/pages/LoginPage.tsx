@@ -48,7 +48,7 @@ export function LoginPage() {
           initial={{ x: -100, y: 100, opacity: 0 }}
           animate={{ x: 0, y: 0, opacity: 1 }} // Note que ajustei o Y para 0
           transition={{ duration: 1, ease: "easeOut" }}
-          className="absolute z-10 left-0"
+          className="absolute z-10 left-0 -translate-y-1/2"
           style={{ top: '57%', width: '44%' }}
         >
           <div className="relative aspect-596/419">

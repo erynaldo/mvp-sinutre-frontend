@@ -34,7 +34,7 @@ export function Header({ drawerId, userName, avatarUrl }: HeaderProps) {
       <button
         type="button"
         onClick={logout}
-        className="btn btn-ghost btn-sm ml-auto gap-2"
+        className="btn btn-sm bg-red-500 text-lg ml-auto gap-2"
         aria-label="Sair"
       >
         <SignOut size={20} />
