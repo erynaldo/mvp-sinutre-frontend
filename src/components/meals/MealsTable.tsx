@@ -7,7 +7,7 @@ interface MealsTableProps {
 }
 
 export function MealsTable({ meals, onActionClick }: MealsTableProps) {
-  
+
   return (
     <section className="card bg-base-100 shadow-sm w-full hidden lg:block">
       <div className="overflow-x-auto">

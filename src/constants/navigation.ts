@@ -21,5 +21,5 @@ export const NAV_ITEMS: readonly NavItem[] = [
   // { id: 'activities', label: 'Atividades', Icon: Barbell, to: "/" },
   { id: 'progress', label: 'Progresso', Icon: ChartLineUp, to: "/stats" },
   { id: 'settings', label: 'Configurações', Icon: Gear, to:"/settings" },
-  // { id: 'logout', label: 'Sair', Icon: SignOutIcon, to:"/logout" },
+  // { id: 'logout', label: 'Sair', Icon: SignOutIcon, to:"/logout" }, 
 ] as const;

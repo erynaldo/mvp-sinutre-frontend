@@ -1,5 +1,4 @@
-import { SignOut, List } from '@phosphor-icons/react';
-import { useAuth } from '@/context/AuthContext';
+import { List } from '@phosphor-icons/react';
 
 interface HeaderProps {
   drawerId: string;
@@ -8,7 +7,6 @@ interface HeaderProps {
 }
 
 export function Header({ drawerId, userName, avatarUrl }: HeaderProps) {
-  const { logout } = useAuth();
   return (
     <header className="flex items-center gap-3">
       <div className="flex-none lg:hidden">
@@ -30,17 +28,6 @@ export function Header({ drawerId, userName, avatarUrl }: HeaderProps) {
       <h1 className="text-base lg:text-4xl font-bold tracking-tight">
         Bem vindo, {userName}!
       </h1>
-{/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
-      <button
-        type="button"
-        onClick={logout}
-        className="btn btn-ghost text-red-500 btn-lg ml-auto gap-2"
-        aria-label="Sair"
-      >
-        <SignOut size={20} />
-        Sair
-      </button>
-{/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */}
     </header>
   );
 }
