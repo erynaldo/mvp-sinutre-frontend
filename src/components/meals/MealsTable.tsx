@@ -4,9 +4,11 @@ import { MealsTableRow } from './MealsTableRow';
 interface MealsTableProps {
   meals: Meal[];
   onActionClick?: (meal: Meal) => void;
+  onEdit?: (meal: Meal) => void;
+  onDelete?: (meal: Meal) => void;
 }
 
-export function MealsTable({ meals, onActionClick }: MealsTableProps) {
+export function MealsTable({ meals, onActionClick, onEdit, onDelete }: MealsTableProps) {
 
   return (
     <section className="card bg-base-100 shadow-sm w-full hidden lg:block">
@@ -28,6 +30,8 @@ export function MealsTable({ meals, onActionClick }: MealsTableProps) {
                 key={meal.id}
                 meal={meal}
                 onActionClick={onActionClick}
+                // onEdit={onEdit}
+                // onDelete={onDelete}
               />
             ))}
           </tbody>
