@@ -6,7 +6,7 @@ import { getFoods } from '@/services/foodService';
 import type { Food } from '@/types/food';
 
 
-export function DietFoodPage() {
+export function StatsPages() {
   const [, setFoods] = useState<Food[]>([]);
   const [, setLoading] = useState(true);
 

@@ -11,6 +11,7 @@ import { ProtectedRoute } from './ProtectRoute';
 import { DietFoodPage } from '@/pages/DietFood';
 import { IMCPage } from '../pages/IMCPage';
 import { ProfilePage } from '@/pages/ProfilePage';
+import { StatsPages } from '@/pages/StatsPage';
 
 export function Router() {
   return (
@@ -33,6 +34,12 @@ export function Router() {
             path="/foods"
             element={<DietFoodPage />}
           />
+
+          <Route
+            path="/stats"
+            element={<StatsPages />}
+          />
+
           <Route
             path="/settings"
             element={<ProfilePage />}
