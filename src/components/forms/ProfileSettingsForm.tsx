@@ -45,23 +45,6 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
     return weight / (heightInMeters * heightInMeters);
   }, [formData.height, formData.weight]);
 
-  const idealCalorieGoal = useMemo(() => {
-    if (imc == null) {
-      return null;
-    }
-
-    const baseGoal = imc < 18.5
-      ? 1800
-      : imc < 25
-        ? 2000
-        : imc < 30
-          ? 1700
-          : 1500;
-
-    const weight = Number(formData.weight);
-    return Number.isFinite(weight) ? Math.round(baseGoal + (weight - 70) * 5) : baseGoal;
-  }, [formData.weight, imc]);
-
   const imcLabel = useMemo(() => {
     if (imc == null) {
       return 'Preencha peso e altura para calcular o IMC.';
