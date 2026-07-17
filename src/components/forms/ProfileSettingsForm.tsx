@@ -3,6 +3,7 @@ import { FormField } from '../forms/FormField';
 import { api } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 import type { User } from '@/types/user';
+import { SimpleHeader } from '../layout/SimpleHeader';
 
 export function ProfileSettingsForm({ user }: { user?: User | null }) {
   const { refreshUser } = useAuth();
@@ -18,6 +19,7 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [hasLoadedInitialUser, setHasLoadedInitialUser] = useState(false);
 
   useEffect(() => {
     setFormData({
@@ -29,9 +31,28 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
       height: user?.height != null ? String(user.height) : '',
       calorieGoal: user?.calorieGoal != null ? String(user.calorieGoal) : '',
     });
+
+    if (!hasLoadedInitialUser) {
+      setError(null);
+      setSuccess(null);
+      setHasLoadedInitialUser(true);
+      return;
+    }
+
     setError(null);
-    setSuccess(null);
-  }, [user]);
+  }, [hasLoadedInitialUser, user]);
+
+  useEffect(() => {
+    if (!success) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setSuccess(null);
+    }, 4000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [success]);
 
   const imc = useMemo(() => {
     const weight = Number(formData.weight);
@@ -53,7 +74,8 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
     if (imc < 18.5) return 'Abaixo do peso';
     if (imc < 25) return 'Peso normal';
     if (imc < 30) return 'Sobrepeso';
-    return 'Obesidade';
+    if (imc >= 30) return 'Obesidade';
+    // return 'Obesidade';
   }, [imc]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -138,11 +160,15 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
               onChange={(event) => setFormData((current) => ({ ...current, birthDate: event.target.value }))}
             />
           </FormField>
-          </div>
-          
-          <h2 className="text-lg font-bold mt-12 mb-4">Dados Complementares</h2>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <h2 className="text-lg font-bold mt-12 mb-4">Dados Complementares</h2>
+        <SimpleHeader
+          title=""
+          subtitle="Altere a Meta Calórica"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
           <FormField label="Peso (kg)" htmlFor="weight">
             <input
               id="weight"
@@ -175,7 +201,7 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
         </div>
 
         <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
-          <p className="text-sm font-semibold text-blue-800">Seu IMC</p>
+          <p className="text-sm font-semibold text-blue-800">Seu IMC é</p>
           {imc == null ? (
             <p className="mt-1 text-sm text-blue-700">Preencha peso e altura para calcular.</p>
           ) : (
