@@ -43,10 +43,21 @@ npm run lint    # ESLint em todo o projeto
 npm run preview # preview do build
 ```
 
-## Alterações feitas por mim
-* fiz a copia do arquivo .env.example
-* Removi a conexão com o repositório do curso. Desconectei do projeto original, do qual eu tinha clonado. Comando bash: git remote remove origin.
-* Design da Página de Login: alterei cores de alguns elementos e background.
-* Implementado a funcionalidade logout "Sair".
-* Adicionado uma animação na página de Login.
+## Tema
+
+O tema customizado `sinutre` (paleta verde) está definido em
+`src/styles/theme.css` usando a sintaxe `@plugin 'daisyui/theme'` do daisyUI v5.
+
+## Minhas implementações, novas funcionalidades e/ou alterações
+* Ref 01: Implementei uma forma de editar/alterar um alimento cadastrado;
+* Ref 02: Implementei uma forma de excluir um alimento cadastrado;
+* Ref 04: Implementei uma forma de cadastrar e alterar dados complementares do usuário logado, como meta calórica, altura e peso;
+* Ref 05: Implementei uma forma de alterar dados complementares do usuário logado;
+* Ref 09: Adicionei uma página que calcula o IMC, o usuário informa peso e altura, e o sistema mostra em que faixa ele se encontra;
+* Ref 11: Fiz uma forma do usuário fazer logout (implementei a função Sair do sistema);
+* Ref 12: Mudei algumas cores da interface e de títulos;
+## outras
+* Fiz uma animação da img (alimentos) na página inicial (página de login);
+
+
 

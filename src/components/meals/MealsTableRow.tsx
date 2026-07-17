@@ -1,8 +1,10 @@
-import { DotsThree } from '@phosphor-icons/react';
+// import { DotsThree } from '@phosphor-icons/react';
 import { PencilSimple, Trash } from "@phosphor-icons/react";
 import { MEAL_CATEGORY_BY_ID } from '@/constants/mealCategories';
 import type { Meal } from '@/types/mealSummary';
 import { formatDate } from '@/utils/date';
+
+import { deleteMealFood } from '../../services/mealService';
 
 interface MealsTableRowProps {
   meal: Meal;
@@ -11,8 +13,16 @@ interface MealsTableRowProps {
   onDelete?: (meal: Meal) => void;
 }
 
-export function MealsTableRow({ meal, onActionClick, onEdit, onDelete }: MealsTableRowProps) {
+export function MealsTableRow({ meal, onEdit, onDelete }: MealsTableRowProps) {
   const category = MEAL_CATEGORY_BY_ID[meal.type];
+
+  const handleDelete = async () => {
+    const confirmed = window.confirm('Deseja excluir esta refeição?');
+    if (!confirmed) return;
+
+    await deleteMealFood(meal.id);
+    onDelete?.(meal);
+  };
 
   return (
     <tr className="hover">
@@ -22,9 +32,10 @@ export function MealsTableRow({ meal, onActionClick, onEdit, onDelete }: MealsTa
       <td className="font-semibold">{category.label}</td>
       <td>
         <span className="badge badge-primary badge-outline">
-          {meal.totals.calories} kcal
+          {Number(meal.totals?.calories ?? 0).toFixed(0)} kcal
         </span>
       </td>
+
       <td className="text-center">
         {/* <button
           type="button"
@@ -34,6 +45,7 @@ export function MealsTableRow({ meal, onActionClick, onEdit, onDelete }: MealsTa
         >
           <DotsThree size={20} />
         </button> */}
+
         <div className="flex items-center justify-center gap-2">
           <button
             type="button"
@@ -42,16 +54,17 @@ export function MealsTableRow({ meal, onActionClick, onEdit, onDelete }: MealsTa
             aria-label={`Alterar refeição ${meal.name}`}
           >
             <PencilSimple size={16} />
-            Alterar
+            {/* Alterar */}
           </button>
+          
           <button
             type="button"
-            onClick={() => onDelete?.(meal)}
+            onClick={handleDelete}
             className="btn btn-sm btn-outline btn-error"
             aria-label={`Excluir refeição ${meal.name}`}
           >
             <Trash size={16} />
-            Excluir
+            {/* Excluir */}
           </button>
         </div>
       </td>

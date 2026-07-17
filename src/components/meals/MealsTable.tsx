@@ -8,7 +8,7 @@ interface MealsTableProps {
   onDelete?: (meal: Meal) => void;
 }
 
-export function MealsTable({ meals, onActionClick, onEdit, onDelete }: MealsTableProps) {
+export function MealsTable({ meals, onActionClick, onDelete, onEdit }: MealsTableProps) {
 
   return (
     <section className="card bg-base-100 shadow-sm w-full hidden lg:block">
@@ -30,8 +30,8 @@ export function MealsTable({ meals, onActionClick, onEdit, onDelete }: MealsTabl
                 key={meal.id}
                 meal={meal}
                 onActionClick={onActionClick}
-                // onEdit={onEdit}
-                // onDelete={onDelete}
+                onEdit={onEdit}
+                onDelete={onDelete}
               />
             ))}
           </tbody>

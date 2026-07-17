@@ -1,10 +1,10 @@
 import type { Icon } from '@phosphor-icons/react';
 import {
   AppleLogo,
-  //Barbell,
   ChartLineUp,
   Gear,
   House,
+  PersonIcon,
   // SignOutIcon,
 } from '@phosphor-icons/react';
 
@@ -18,8 +18,8 @@ export interface NavItem {
 export const NAV_ITEMS: readonly NavItem[] = [
   { id: 'home', label: 'Início', Icon: House, to: "/" },
   { id: 'diet', label: 'Dieta', Icon: AppleLogo, to: "/foods" },
-  // { id: 'activities', label: 'Atividades', Icon: Barbell, to: "/" },
+  { id: 'imc', label: 'IMC', Icon: PersonIcon, to: "/imc" },
   { id: 'progress', label: 'Progresso', Icon: ChartLineUp, to: "/stats" },
   { id: 'settings', label: 'Configurações', Icon: Gear, to:"/settings" },
-  // { id: 'logout', label: 'Sair', Icon: SignOutIcon, to:"/logout" }, 
+  // { id: 'imc', label: 'Calcular IMC', Icon: CalculatorIcon, to: '/imc2' },
 ] as const;

@@ -9,6 +9,8 @@ import { LoginPage } from '@/pages/LoginPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { ProtectedRoute } from './ProtectRoute';
 import { DietFoodPage } from '@/pages/DietFood';
+import { IMCPage } from '../pages/IMCPage';
+import { ProfilePage } from '@/pages/ProfilePage';
 
 export function Router() {
   return (
@@ -30,12 +32,26 @@ export function Router() {
           <Route
             path="/foods"
             element={<DietFoodPage />}
-        
           />
-
+          <Route
+            path="/settings"
+            element={<ProfilePage />}
+          />
         </Route>
 
-       
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }
+        >
+
+          <Route
+            path="/imc"
+            element={<IMCPage />}
+          />
+        </Route>
 
         <Route
           element={

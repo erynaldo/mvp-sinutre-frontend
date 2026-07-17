@@ -3,4 +3,9 @@ export interface User {
   githubLogin: string;
   name: string;
   avatarUrl: string;
+  birthDate?: string | null;
+  email?: string | null;
+  weight?: number | null;
+  height?: number | null;
+  calorieGoal?: number | null;
 }

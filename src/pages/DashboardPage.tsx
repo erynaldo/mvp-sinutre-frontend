@@ -7,9 +7,11 @@ import { MealFab } from '@/components/meals/MealFab';
 import { MealsList } from '@/components/meals/MealsList';
 import { MealsTable } from '@/components/meals/MealsTable';
 import { AddMealModal } from '@/components/modal/AddMealModal';
+import { EditMealModal } from '@/components/modal/EditMealModal';
 import { useAuth } from '@/context/AuthContext';
 import { Meal } from '@/types/mealSummary';
 import { api } from '@/lib/api';
+
 
 import {
   //MACRO_SUMMARY,
@@ -32,13 +34,14 @@ interface DashboardPageProps {
 
 export function DashboardPage({ drawerId }: DashboardPageProps) {
   const { user } = useAuth();
-  if (!user){
+  if (!user) {
     return <></>
   }
   const modal = useMealModal();
 
   const [meals, setMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
+  const [editingMeal, setEditingMeal] = useState<Meal | null>(null);
 
   async function loadMeals() {
     try {
@@ -86,14 +89,16 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
 
   const macroSummary = useMemo(() => {
     const today = new Date();
-    return meals.filter((meal) => {
+    const dailyMeals = meals.filter((meal) => {
       const date = new Date(meal.eatTime);
       return (
-        date.getDay() === today.getDay() &&
+        date.getDate() === today.getDate() &&
         date.getMonth() === today.getMonth() &&
         date.getFullYear() === today.getFullYear()
       );
-    }).reduce(
+    });
+
+    return dailyMeals.reduce(
       (acc, meal) => {
         acc.carbs += meal.totals.carbs;
         acc.proteins += meal.totals.proteins;
@@ -107,11 +112,14 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
         proteins: 0,
         fats: 0,
         calories: 0,
-
-        caloriesGoal: 1000, //ainda não veio do banco de dados
+        caloriesGoal: user?.calorieGoal ?? 0,
       },
     );
-  }, [meals]);
+  }, [meals, user?.calorieGoal]);
+
+  const exceededCalorieGoal = Boolean(
+    user?.calorieGoal && Number(user.calorieGoal) > 0 && macroSummary.calories > Number(user.calorieGoal),
+  );
 
 
   if (loading) {
@@ -132,6 +140,14 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
           avatarUrl={user.avatarUrl}
         />
 
+        {exceededCalorieGoal && (
+          <div className="alert alert-error shadow-sm">
+            <span>
+              Meta diária atingida: você consumiu {macroSummary.calories.toFixed(0)} kcal, acima da meta de {user.calorieGoal} kcal para hoje.
+            </span>
+          </div>
+        )}
+
         <MacroStatsBar summary={macroSummary} />
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6 items-stretch">
@@ -139,7 +155,7 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
           <AddMealCard onSelectCategory={modal.openWith} />
         </div>
 
-        <MealsTable meals={meals} />
+        <MealsTable meals={meals} onDelete={loadMeals} onEdit={setEditingMeal} />
         <MealsList meals={meals} />
       </div>
 
@@ -151,6 +167,13 @@ export function DashboardPage({ drawerId }: DashboardPageProps) {
         onClose={modal.close}
         onSave={modal.close}
         onMealCreated={loadMeals}
+      />
+
+      <EditMealModal
+        open={Boolean(editingMeal)}
+        meal={editingMeal}
+        onClose={() => setEditingMeal(null)}
+        onMealUpdated={loadMeals}
       />
     </>
   );

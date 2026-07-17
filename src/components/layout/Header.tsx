@@ -3,7 +3,7 @@ import { List } from '@phosphor-icons/react';
 interface HeaderProps {
   drawerId: string;
   userName: string;
-  avatarUrl: string;
+  avatarUrl: string; 
 }
 
 export function Header({ drawerId, userName, avatarUrl }: HeaderProps) {
