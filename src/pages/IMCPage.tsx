@@ -75,7 +75,7 @@ export function IMCPage() {
   return (
     <div className="flex flex-col gap-6 p-6 max-w-2xl mx-auto">
 
-      <SimpleHeader title="Calculadora de IMC" subtitle="Acompanhe sua evolução corporal" />
+      <SimpleHeader title="Calculadora de IMC" subtitle="IMC - Índice de Massa Corporal" />
 
       <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

@@ -54,7 +54,7 @@ export function MealsTableRow({ meal, onEdit, onDelete }: MealsTableRowProps) {
             aria-label={`Alterar refeição ${meal.name}`}
           >
             <PencilSimple size={16} />
-            {/* Alterar */}
+            Alterar
           </button>
           
           <button
@@ -64,7 +64,7 @@ export function MealsTableRow({ meal, onEdit, onDelete }: MealsTableRowProps) {
             aria-label={`Excluir refeição ${meal.name}`}
           >
             <Trash size={16} />
-            {/* Excluir */}
+            Excluir
           </button>
         </div>
       </td>

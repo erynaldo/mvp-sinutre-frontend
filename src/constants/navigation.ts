@@ -4,7 +4,8 @@ import {
   ChartLineUp,
   Gear,
   House,
-  PersonIcon,
+  CalculatorIcon,
+  // PersonIcon,
   // SignOutIcon,
 } from '@phosphor-icons/react';
 
@@ -18,8 +19,8 @@ export interface NavItem {
 export const NAV_ITEMS: readonly NavItem[] = [
   { id: 'home', label: 'Início', Icon: House, to: "/" },
   { id: 'diet', label: 'Dieta', Icon: AppleLogo, to: "/foods" },
-  { id: 'imc', label: 'IMC', Icon: PersonIcon, to: "/imc" },
+  // { id: 'imc', label: 'IMC', Icon: PersonIcon, to: "/imc" },
+  { id: 'imc', label: 'Calculadora IMC', Icon: CalculatorIcon, to: "/imc" },
   { id: 'progress', label: 'Progresso', Icon: ChartLineUp, to: "/stats" },
   { id: 'settings', label: 'Configurações', Icon: Gear, to:"/settings" },
-  // { id: 'imc', label: 'Calcular IMC', Icon: CalculatorIcon, to: '/imc2' },
 ] as const;
