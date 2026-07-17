@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FormField } from '../forms/FormField';
 
 import { FoodItem } from '@/types/meal';
@@ -10,6 +10,15 @@ interface MealItemFormProps {
 }
 
 
+function calculateItemMacros(food: Food, grams: number) {
+  return {
+    calories: (food.caloriesPer100g * grams) / 100,
+    carbs: (food.carbsPer100g * grams) / 100,
+    protein: (food.proteinPer100g * grams) / 100,
+    fat: (food.fatPer100g * grams) / 100,
+  };
+}
+
 export function MealItemForm({ onAdd }: MealItemFormProps) {
   const [query, setQuery] = useState('');
 
@@ -19,6 +28,20 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
     useState<Food | null>(null);
 
   const [grams, setGrams] = useState('');
+
+  const previewMacros = useMemo(() => {
+    if (!selectedFood) {
+      return null;
+    }
+
+    const gramsValue = Number(grams);
+
+    if (!Number.isFinite(gramsValue) || gramsValue <= 0) {
+      return null;
+    }
+
+    return calculateItemMacros(selectedFood, gramsValue);
+  }, [grams, selectedFood]);
 
   function handleAdd() {
     if (!selectedFood) {
@@ -31,6 +54,8 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
       return;
     }
 
+    const macros = calculateItemMacros(selectedFood, gramsValue);
+
     onAdd({
         id: Date.now(),
 
@@ -40,21 +65,13 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
 
         grams: gramsValue,
 
-        calories:
-          (selectedFood.caloriesPer100g *
-            gramsValue) / 100,
+        calories: macros.calories,
 
-        carbs:
-          (selectedFood.carbsPer100g *
-            gramsValue) / 100,
+        carbs: macros.carbs,
 
-        protein:
-          (selectedFood.proteinPer100g *
-            gramsValue) / 100,
+        protein: macros.protein,
 
-        fat:
-          (selectedFood.fatPer100g *
-            gramsValue) / 100,
+        fat: macros.fat,
       });
 
       setSelectedFood(null);
@@ -145,5 +162,29 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
       </button>
 
     </div>
+
+    {previewMacros && (
+      <div className="rounded-xl border border-base-300 bg-base-50 p-4 lg:col-span-3">
+        <p className="text-sm font-semibold text-base-content">Valores estimados para a porção</p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="rounded-lg bg-base-100 p-3">
+            <p className="text-xs uppercase tracking-wide text-base-content/60">Calorias</p>
+            <p className="mt-1 text-lg font-semibold">{previewMacros.calories.toFixed(0)} kcal</p>
+          </div>
+          <div className="rounded-lg bg-base-100 p-3">
+            <p className="text-xs uppercase tracking-wide text-base-content/60">Proteínas</p>
+            <p className="mt-1 text-lg font-semibold">{previewMacros.protein.toFixed(1)} g</p>
+          </div>
+          <div className="rounded-lg bg-base-100 p-3">
+            <p className="text-xs uppercase tracking-wide text-base-content/60">Gordura</p>
+            <p className="mt-1 text-lg font-semibold">{previewMacros.fat.toFixed(1)} g</p>
+          </div>
+          <div className="rounded-lg bg-base-100 p-3">
+            <p className="text-xs uppercase tracking-wide text-base-content/60">Carboidratos</p>
+            <p className="mt-1 text-lg font-semibold">{previewMacros.carbs.toFixed(1)} g</p>
+          </div>
+        </div>
+      </div>
+    )}
   );
 }

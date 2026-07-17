@@ -91,7 +91,8 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
         calorieGoal: parsedCalorieGoal,
       });
       await refreshUser();
-      setSuccess('Dados salvos com sucesso.');
+      const hasGoalUpdate = parsedCalorieGoal !== Number(user?.calorieGoal ?? 0);
+      setSuccess(hasGoalUpdate ? 'Meta calórica salva com sucesso!' : 'Dados salvos com sucesso.');
     } catch {
       setError('Erro ao salvar dados. Tente novamente.');
     } finally {
@@ -103,8 +104,8 @@ export function ProfileSettingsForm({ user }: { user?: User | null }) {
     <div className="bg-white p-6 rounded-xl border border-gray-200">
       <h2 className="text-lg font-bold mb-4">Dados do Usuário</h2>
 
-      {error && <div className="alert alert-error mb-4">{error}</div>}
-      {success && <div className="alert alert-success mb-4">{success}</div>}
+      {error && <div className="alert alert-error mb-4" role="alert">{error}</div>}
+      {success && <div className="alert alert-success mb-4" role="status">{success}</div>}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">

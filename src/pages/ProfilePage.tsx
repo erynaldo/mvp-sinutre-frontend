@@ -17,7 +17,7 @@ export const ProfilePage = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto p-6">
         <SimpleHeader
-          title="Informações do Usuário e Dados Complementares"
+          title="Gerencie seus Dados"
           subtitle="Configure a Meta Calórica"
         />
         <div className="mt-6">
