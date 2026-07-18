@@ -42,19 +42,23 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
 
         calories:
           (selectedFood.caloriesPer100g *
-            gramsValue) / 100,
+            gramsValue) /
+          100,
 
         carbs:
           (selectedFood.carbsPer100g *
-            gramsValue) / 100,
+            gramsValue) /
+          100,
 
         protein:
           (selectedFood.proteinPer100g *
-            gramsValue) / 100,
+            gramsValue) /
+          100,
 
         fat:
           (selectedFood.fatPer100g *
-            gramsValue) / 100,
+            gramsValue) /
+          100,
       });
 
       setSelectedFood(null);
@@ -81,8 +85,7 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
 
 
   return (
-    <div className="grid gap-4 items-end lg:grid-cols-[1fr_150px_120px]">
-    {/* <div className="grid gap-4 items-end lg:grid-template-columns:1fr_150px_120px"> */}
+    <div className="grid gap-4 items-end lg:[grid-template-columns:1fr_150px_120px]">
       <div className="relative">
         
         <FormField
@@ -140,7 +143,7 @@ export function MealItemForm({ onAdd }: MealItemFormProps) {
         />
       </FormField>
 
-      <button type="button" className="btn btn-primary btn-outline h-10"  onClick={handleAdd}>
+      <button type="button" className="btn btn-primary btn-outline h-12"  onClick={handleAdd}>
         Adicionar
       </button>
 
