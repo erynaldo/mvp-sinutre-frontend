@@ -23,7 +23,7 @@ export function EditMealModal({ open, meal, onClose, onMealUpdated }: EditMealMo
     eatTime: '',
   });
   const [items, setItems] = useState<FoodItem[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     if (!meal) return;
@@ -37,7 +37,7 @@ export function EditMealModal({ open, meal, onClose, onMealUpdated }: EditMealMo
 
     setItems(
       (meal.items ?? []).map((item) => ({
-        id: item.id,
+        id: item.id ?? `${item.mealId ?? meal.id}-${item.foodId}`,
         foodId: item.foodId,
         name: item.food?.name ?? 'Alimento',
         grams: item.grams,

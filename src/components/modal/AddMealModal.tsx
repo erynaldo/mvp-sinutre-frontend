@@ -6,7 +6,7 @@ import { MealMacrosSummary } from './MealMacrosSummary';
 import { MealMetadataForm } from './MealMetadataForm';
 import { MealCategory } from '@/types/meal';
 import { MEAL_CATEGORY_BY_ID } from '@/constants/mealCategories';
-import { createMeal } from '@/services/mealService';
+import { createMeal } from '@/services/mealService'; 
 
 import { MealState } from '@/types/meal';
 

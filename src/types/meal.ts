@@ -1,7 +1,7 @@
 export type MealCategory = 'breakfast' | 'lunch' | 'snack' | 'dinner';
 
 export interface FoodItem {
-  id: number;
+  id: number | string;
   foodId: number;
 
   name: string;
